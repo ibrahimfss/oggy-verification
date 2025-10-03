@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body>
+  <h3>Enter your 1win Player ID</h3>
+  <input id="pid" placeholder="Player ID" />
+  <button id="btn">Check & Unlock</button>
+  <div id="result"></div>
+<script>
+document.getElementById('btn').onclick = async () => {
+  const pid = document.getElementById('pid').value.trim();
+  if (!pid) return alert('Enter Player ID');
+  const res = await fetch(`https://yourproject.vercel.app/api/check?player_id=${encodeURIComponent(pid)}`);
+  const data = await res.json();
+  if (data.access) {
+    document.getElementById('result').innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/UNLISTED_VIDEO_ID" frameborder="0" allowfullscreen></iframe>`;
+  } else {
+    document.getElementById('result').innerText = data.message || 'Access denied';
+  }
+};
+</script>
+</body>
+</html>
